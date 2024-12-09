@@ -1,0 +1,109 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <script language="javascript" type="text/javascript" src="/static/jquery.min.js"></script>
+  <script language="javascript" type="text/javascript" src="/static/connect4_p5.js"></script>
+  <script language="javascript" type="text/javascript" src="/static/connect4_sketch.js"></script>
+  <script language="javascript" type="text/javascript" src="/static/connect4_board.js"></script>
+  <script language="javascript" type="text/javascript" src="/static/connect4_arrow.js"></script>
+  <script language="javascript" type="text/javascript" src="/static/connect4_computer.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <style>
+      body {
+        /*background: #757575;*/
+        /*background-image: url(unisa.jpg);*/
+        background: url('/static/blackboard.jpg') no-repeat center center fixed;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        text-align: center;
+        padding: 0;
+        margin: 0;
+        outline: none;
+        font-family: Roboto, Arial, sans-serif;
+        font-size: 20px;
+        color: #35496C;
+      }
+      #sketch-holder {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #defaultCanvas0 {
+        margin:0 ; border:5px solid #555;
+      }
+      h1{
+        color: #ffffff;
+      }
+      h4 {
+        color: #0277bd;
+      }
+      .heading {
+         /* background-color: rgba(173, 226, 226, 0.75);*/
+        /* background-color: rgba(255, 255, 255, 0.55); */
+        padding: 3px;
+        margin-bottom: 0px;
+      }
+      a.button {
+        -webkit-appearance: button;
+       -moz-appearance: button;
+        appearance: button;
+
+        text-decoration: none;
+        color: #35496C;
+        border-color: #35496C;
+      }
+      #Restart, #Back{
+        background-color: #35496C;
+        width: 10%;
+        margin: 1.5%;
+        margin-bottom: 0%;
+        margin-top: 0%;
+      }
+    </style>
+    <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash" rel="stylesheet">
+</head>
+<body>
+   <div class="heading">
+       <h1>Gioca a Forza 4 con Pepper!</h1>
+       <a id="Back" class="btn btn-primary" href="/index">Indietro</a>
+     <!--<button><a h
+     ref="\connect4">Ricomincia</a></button> <button> <a href="\games"> Indietro </a></button> -->
+     <!--<a id="Restart" class="btn btn-primary" href="\connect4">Ricomincia</a>-->
+     <h3> </h3>
+   </div>
+   <div id="sketch-holder">
+      <!-- Our sketch will go here! -->
+   </div>
+
+
+<script type="text/javascript">
+ function greeting(){
+  console.log("Pepper saluta");
+  //Pepper dice qualcosa
+  URL_SERVER_PEPPER = '{{ server_url }}';
+   $.ajax({
+      type: "GET",
+       url: URL_SERVER_PEPPER+"/hello",
+       crossDomain: true,
+       headers: { 'Access-Control-Allow-Origin': '*' },
+       data: {
+          value: "1"
+       },
+       success: function (response, request) {
+          console.log(response.responseText);
+      },
+      error: function (request, error) {
+          console.log(arguments);
+          alert(" Can't do because: " + error);
+      },
+    });
+}
+        window.onload = greeting;
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Pepper Futuro Remoto</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/all.css">
+    <link rel="stylesheet" href="/static/stile.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <script type="text/javascript" src="/static/jquery.min.js"></script>
+  </head>
+  <body>
+
+    <div class="row">
+      <div class="col-md-2 animate__animated animate__fadeIn" style="position: fixed">
+      <img src="/static/logo_standard.png" width="80%" height="80%" style="margin: 1em; margin-top: 150%">
+    </div>
+
+    <div class="col-md-10 testbox animate__animated animate__slideInDown" style="position: absolute; right: 0;">
+
+    <form action="">
+
+       <div class="question">
+        <p><b>Che tipo di amico dovrebbe rappresentare Pepper per te?</b></p>
+        <br>
+        <div class="question-answer">
+          <div>
+            <input type="radio" value="0" id="radio_1" name="question1"/>
+            <label for="radio_1" class="radio small" id="q1"><span>Un compagno chiassoso</span></label>
+          </div>
+          <div>
+            <input type="radio" value="1" id="radio_2" name="question1"/>
+            <label for="radio_2" class="radio small" id="q2"><span>Un amico fedele</span></label>
+          </div>
+          <div>
+            <input type="radio" value="2" id="radio_3" name="question1"/>
+            <label for="radio_3" class="radio small" id="q3"><span>Non voglio che sia mio amico</span></label>
+          </div>
+        </div>
+      </div>
+      <hr style="width: 50%; color: #35496C; ">
+      <br>
+      <div class="question">
+        <p><b>Come vuoi che Pepper reagisca alle cose che non sa fare?</b></p>
+        <br>
+        <div class="question-answer">
+          <div>
+            <input type="radio" value="1" id="radio_4" name="question2"/>
+            <label for="radio_4" class="radio small" id="q4"><span>Approfondisca la questione</span></label>
+          </div>
+          <div>
+            <input type="radio" value="0" id="radio_5" name="question2"/>
+            <label for="radio_5" class="radio small" id="q5"><span>Trovi soluzioni alternative</span></label>
+          </div>
+          <div>
+            <input type="radio" value="2" id="radio_6" name="question2"/>
+            <label for="radio_6" class="radio small" id="q6"><span>Sia sincero e lasci perdere</span></label>
+          </div>
+        </div>
+        <hr style="width: 50%; color: #35496C; ">
+        <br>
+        <div class="question">
+        <p><b>Cosa vorresti che Pepper organizzasse per te?</b></p>
+        <br>
+        <div class="question-answer">
+          <div>
+            <input type="radio" value="2" id="radio_7" name="question3"/>
+            <label for="radio_7" class="radio small" id="q7"><span>Una serata al cinema</span></label>
+          </div>
+          <div>
+            <input type="radio" value="1" id="radio_8" name="question3"/>
+            <label for="radio_8" class="radio small" id="q8"><span>Un incontro di Kick Boxing </span></label>
+          </div>
+          <div>
+            <input type="radio" value="0" id="radio_9" name="question3"/>
+            <label for="radio_9" class="radio small" id="q9"><span>Una festa a sorpresa</span></label>
+          </div>
+        </div>
+        <div class="btn-block">
+          <button type="button" id="confirm">Conferma </button>
+        </div>
+    </form>
+    </div>
+    </div>
+
+  <script>
+    URL_SERVER_PEPPER = '{{ server_url }}';
+    $("#confirm").click(function() {
+        var response1 = $('input[type="radio"][name="question1"]:checked').val();
+        var response2 = $('input[type="radio"][name="question2"]:checked').val();
+        var response3 = $('input[type="radio"][name="question3"]:checked').val();
+
+        
+        if (typeof response1 === "undefined") {
+        }
+        else if (typeof response2 === "undefined") {
+        }
+        else if (typeof response3 === "undefined") {
+        }
+        else {
+
+          var responses=[response1,response2, response3];
+
+          var simpatico=0;
+          var arrabbiato=0;
+          var annoiato=0;
+          var behaviour=0;
+          var i=0;
+
+          for(i=0; i<3;i++){
+            if(responses[i]==0){
+              simpatico++;
+            }else if(responses[i]==1){
+              arrabbiato++;
+            }else if (responses[i]==2){
+              annoiato++;
+            }
+          }
+
+          if(simpatico==arrabbiato && simpatico==annoiato){
+            console.log("Tutti uguali");
+            behaviour=responses[0];
+          }else if(simpatico>arrabbiato && simpatico>annoiato){
+            behaviour=0;
+          }else if(arrabbiato>simpatico && arrabbiato>annoiato){
+            behaviour=2;
+          }else if(annoiato>arrabbiato && annoiato>simpatico){
+            behaviour=1;
+          }
+
+          //invio le risposte al server di pepper
+          $.ajax({
+           type: "GET",
+           url: URL_SERVER_PEPPER+"/survey",
+           crossDomain: true,
+           xhrFields: { withCredentials: true },
+           data: {
+             type:behaviour
+           },
+           success: function (response, request) {
+              obj = JSON.parse(response.responseText);
+              alert(obj.Visit.VisitId);
+          },
+          error: function (request, error) {
+              console.log(arguments);
+          },
+          dataType: "json"
+         });
+         location.href = "/games?behaviour="+behaviour;
+        }
+    });
+  </script>
+  <script type="text/javascript">
+ function load(){
+  console.log("Carica immagine neutrale");
+  //Pepper dice qualcosa
+  URL_SERVER_PEPPER = '{{ server_url }}';
+   $.ajax({
+      type: "GET",
+       url: URL_SERVER_PEPPER+"/reset",
+       crossDomain: true,
+       headers: { 'Access-Control-Allow-Origin': '*' },
+       data: {
+          value: "1"
+       },
+       success: function (response, request) {
+          console.log(response.responseText);
+      },
+      error: function (request, error) {
+          console.log(arguments);
+      },
+    });
+}
+        window.onload = load; 
+
+</script>
+  </body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta content="width=device-width, initial-scale=1.0" name="viewport">
+		<!-- bootstrap here -->
+		<link crossorigin="anonymous" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
+		<link href="/static/tris_style.css" rel="stylesheet">
+		<!-- CSS only -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="/static/tris_algoritmo_di_ricerca.js"></script>
+		<script src="/static/tris_controller.js"></script>
+		<title>Tic Tac Toe</title>
+	</head>
+	<body>
+		<audio id="beep">
+			<source src="/static/tris_beep.mp3" type="audio/mpeg">
+		</audio>
+		<audio id="boop">
+			<source src="/static/tris_boop.mp3" type="audio/mpeg">
+		</audio>
+		<div class="game_settings">
+			<center><span class="game_settings__button" href="">Clicca per giocare</span><span class="exit_game__button" onclick="Redirect()">Esci</span></center>
+		</div>
+		<div class="game animate__animated animate__fadeIn">
+			<div class="game__cell game__cell--right_border game__cell--lower_border placeholder c1" id="1"></div>
+			<div class="game__cell game__cell--right_border game__cell--left_border game__cell--lower_border placeholder c2" id="2"></div>
+			<div class="game__cell game__cell--left_border game__cell--lower_border placeholder c3" id="3"></div>
+			<div class="game__cell game__cell--right_border game__cell--upper_border game__cell--lower_border placeholder c4" id="4"></div>
+			<div class="game__cell game__cell--right_border game__cell--left_border game__cell--upper_border game__cell--lower_border placeholder c5" id="5"></div>
+			<div class="game__cell game__cell--left_border game__cell--upper_border game__cell--lower_border placeholder c6" id="6"></div>
+			<div class="game__cell game__cell--right_border game__cell--upper_border placeholder c7" id="7"></div>
+			<div class="game__cell game__cell--right_border game__cell--left_border game__cell--upper_border placeholder c8" id="8"></div>
+			<div class="game__cell game__cell--left_border game__cell--upper_border placeholder c9" id="9"></div>
+		</div>
+		<div class="game_status">
+			<span class="game_status__label">>>> Stato del gioco:</span>
+			<span class="game_status__content"></span>
+		</div>
+		<div class="easteregg">
+			<div class="easteregg__first_line"></div>
+			<div class="easteregg__second_line"></div>
+			<div class="easteregg__third_line"></div>
+			<div class="easteregg__fourth_line"></div>
+			<div class="easteregg__love">Made with
+				<span class="easteregg__love--red">
+					<i class="fas fa-heart"></i>
+				</span> by a WarGames fan.
+			</div>
+		</div>
+		<div class="template">
+			<i class="game__cell__circle far fa-circle"></i>
+			<i class="game__cell__cross fas fa-times"></i>
+		</div>
+
+
+
+<script type="text/javascript">
+	function greeting(){
+	console.log("Pepper saluta");
+	//Pepper dice qualcosa
+	URL_SERVER_PEPPER = '{{ server_url }}';
+  	 $.ajax({
+    	type: "GET",
+	     url: URL_SERVER_PEPPER+"/hello",
+	     crossDomain: true,
+	     headers: { 'Access-Control-Allow-Origin': '*' },
+	     data: {
+	        value: "1"
+	     },
+	     success: function (response, request) {
+	        console.log(response.responseText);
+	    },
+	    error: function (request, error) {
+	        console.log(arguments);
+	        alert(" Can't do because: " + error);
+	    },
+   	});
+}
+        window.onload = greeting;
+
+</script>
+
+
+<script type="text/javascript">
+	function Redirect(){
+		window.location.href = "/index";
+	}
+</script>
+	</body>
+</html>

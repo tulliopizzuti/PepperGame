@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="John Garbi">
+    <title>Gioco dell'impiccato</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw=="
+          crossorigin="anonymous">
+    <link href="/static/hangman_style.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="container animate__animated animate__fadeIn">
+    <h1 id="title" style="color: white;">Gioco dell'impiccato</h1>
+    <div class="static col-md-8 col-md-offset-2" id="initialInfoDiv">
+        <div class="modal fade" id="howToPlay" tabindex="-1" role="dialog" aria-labelledby="howToPlayLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"
+                                aria-label="Close Hangman Information Dialogue"><span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="howToPlayLabel">Come si gioca</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p id="howToPlay">Il gioco dell'impiccato ha l'obiettivo di indovinare la parola nascosta. Per
+                            giocare, seleziona una delle categorie nel menu a tendina Categorie. Le vocali della parola
+                            nascosta sono fornite, per vincere bisogna indovinare tutte le altre lettere in meno di 5
+                            tentativi.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p id="initialInfo">Il gioco dell'impiccato ha l'obiettivo di indovinare la parola nascosta. Per giocare,
+            seleziona una delle categorie nel menu a tendina Categorie. Le vocali della parola nascosta sono fornite,
+            per vincere bisogna indovinare tutte le altre lettere in meno di 5 tentativi.</p>
+        <div class="clear"></div>
+        <div class="dropdown" id="menu">
+            <button href="#" data-toggle="dropdown" type="button" id="categoryDropdown"
+                    class="btn btn-default dropdown-toggle">Categorie<b class="caret"></b>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="categoryDropdown">
+                <li id="0" class="category" role="presentation">Animali</li>
+                <li id="1" class="category" role="presentation">Nazioni</li>
+                <li id="2" class="category" role="presentation">Calciatori</li>
+                <li id="3" class="category" role="presentation">Sport</li>
+                <li id="4" class="category" role="presentation">Capitali</li>
+                <li id="5" class="category" role="presentation">Oggetti</li>
+            </ul>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="game" class="col-md-10 col-md-offset-1 animate__animated animate__fadeIn">
+        <h2 id="category"></h2>
+        <div id="importantStatus">
+            <p id="triesLeft"></p>
+        </div>
+        <h3 id="word"></h3>
+        <div id="keyboard"></div>
+        <canvas id="hangman" height="300">
+        </canvas>
+        <div id="status">
+            <div class="alert alert-info center fade in" style="font-size: 2em;">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong> Indovina la parola nascosta in meno di 5 tentativi. </strong>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="exit" style="margin-top: 5%; height: 5%;">
+    <center>
+        <a class="btn btn-primary d-inline-flex align-items-center justify-content-center"  id="exitButton" href="\index">Esci</a> 
+    </center>
+<div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+        integrity="sha256-KXn5puMvxCw+dAYznun+drMdG1IFl3agK0p/pqT9KAo= sha512-2e8qq0ETcfWRI4HJBzQiA3UoyFk6tbNyG+qSaIBZLyW9Xf3sWZHN/lxe9fTh1U45DpPf07yj94KsUHHWe4Yk1A=="
+        crossorigin="anonymous"></script>
+<script src="/static/hangman_script.js"></script>
+<noscript>
+    Abilita JavaScript per avviare il gioco.
+</noscript>
+
+<script type="text/javascript">
+ function greeting(){
+	console.log("Pepper saluta");
+	//Pepper dice qualcosa
+	URL_SERVER_PEPPER = '{{ server_url }}';
+   $.ajax({
+    	type: "GET",
+	     url: URL_SERVER_PEPPER+"/hello",
+	     crossDomain: true,
+	     headers: { 'Access-Control-Allow-Origin': '*' },
+	     data: {
+	        value: "1"
+	     },
+	     success: function (response, request) {
+	        console.log(response.responseText);
+	    },
+	    error: function (request, error) {
+	        console.log(arguments);
+	    },
+   	});
+}
+        window.onload = greeting; 
+
+</script>
+</body>
+
+</html>

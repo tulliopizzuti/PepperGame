@@ -1,0 +1,263 @@
+* {
+	font-family: 'VT323', monospace;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 100vw;
+	height: 100vh;
+	/*backround-color: #2f313a;*/
+	background-image: url("/static/green.jpg");
+	background-size: cover;
+}
+.game {
+	width: 800px;
+	height: 800px;
+}
+
+.game:after {
+	display: table;
+	clear: both;
+	content: "";
+}
+
+.game__cell {
+	position: relative;
+	width: 266px;
+	height: 266px;
+	float: left;
+}
+
+.game__cell__circle {
+	font-size: 213px;
+}
+
+.game__cell__cross {
+	font-size: 298px;
+}
+
+.game__cell__circle{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	color: red;
+}
+
+
+.game__cell__cross {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	color: white;
+}
+
+.template {
+	display: none;
+}
+
+.game_status {
+	width: 100%;
+	font-size: 3em;
+	padding: 20px 0;
+	cursor: default;
+	color: #bdc0ca;
+}
+.game_settings {
+	width: 100%;
+	font-size: 5em;
+	padding: 20px 0;
+	cursor: default;
+	color: #bdc0ca;
+}
+
+.game_settings__input {
+	width: 20px;
+	height: 10px;
+	font-size: 16px;
+	font-weight: bold;
+	margin-left: 10px;
+	padding: 2px 6px;
+	text-align: center;
+	vertical-align: middle;
+	color: #2f313a;
+	border: none;
+	outline: none;
+	background-color: #bdc0ca;
+}
+
+.game_settings__button {
+	font-size: 24px;
+	margin-left: 10px;
+	padding: 5px;
+	vertical-align: middle;
+	text-decoration: none;
+	/*background-color: #bdc0ca;*/
+	background-image: url("/static/greyPattern2.jpg");
+	background-size: cover;
+	border-radius: 15px;
+	color: #2f313a;
+}
+
+.game_settings__button:hover{
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+ }
+
+.exit_game__button {
+	font-size: 24px;
+	margin-left: 10px;
+	padding: 5px;
+	vertical-align: middle;
+	text-decoration: none;
+	/*background-color: red;*/
+	background-image: url(/static/exitImage3.jpg);
+	background-size: cover;
+	border-radius: 15px;
+	color: white;
+}
+.exit_game__button:hover{
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+     }
+
+.game_status__label, .game_settings__label, .game_status__content {
+	padding-left: 10px;
+	vertical-align: middle;
+}
+
+.game__cell--right_border {
+	border-right: 10px solid #bdc0ca;
+}
+
+.game__cell--left_border {
+	border-left: 10px solid #bdc0ca;
+}
+
+.game__cell--upper_border {
+	border-top: 10px solid #bdc0ca;
+}
+
+.game__cell--lower_border {
+	border-bottom: 10px solid #bdc0ca;
+}
+
+.easteregg {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	padding: 50px;
+	background-color: #2f313a;
+}
+
+.easteregg__first_line, .easteregg__second_line, .easteregg__third_line, .easteregg__fourth_line {
+	font-size: 28px;
+	text-transform: uppercase;
+	color: #bdc0ca;
+}
+
+.easteregg__love {
+	display: none;
+	position: absolute;
+	bottom: 30px;
+	left: 50px;
+	font-size: 18px;
+	color: #bdc0ca;
+}
+
+.easteregg__love--red{
+	font-size: 14px;
+	color: red;
+}
+.placeholder {
+	position: relative;
+}
+.placeholder::before, .placeholder::after {
+	content: "";
+	display: block;
+	left: 0;
+	top: 0;
+	width: 100%;
+	text-align: center;
+}
+.placeholder::before {
+	/* box-shadow: inset 0 1px 10px #bbb; */
+	border-radius: 3px;
+	height: 250px;
+}
+.placeholder::after {
+	font-size: 49px;
+	opacity: 0.25;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	font-family: "FontAwesome";
+}
+.placeholder.c1::after {
+	content: "1";
+    font-size: 8em;
+    color: white;
+   	font-family: 'VT323', monospace;
+}
+
+.placeholder.c2::after {
+	content: "2";
+    font-size: 8em;
+    color: white;
+   	font-family: 'VT323', monospace;
+
+}
+.placeholder.c3::after {
+	content: "3";
+    font-size: 8em;
+    color: white;
+   	font-family: 'VT323', monospace;
+}
+.placeholder.c4::after {
+	content: "4";
+    font-size: 8em;
+    color: white;
+  	font-family: 'VT323', monospace;
+}
+.placeholder.c5::after {
+	content: "5";
+    font-size: 8em;
+    color: white;
+    font-family: 'VT323', monospace;
+}
+.placeholder.c6::after {
+	content: "6";
+    font-size: 8em;
+    color: white;
+    font-family: 'VT323', monospace;
+}
+.placeholder.c7::after {
+	content: "7";
+    font-size: 8em;
+    color: white;
+    font-family: 'VT323', monospace;
+}
+.placeholder.c8::after {
+	content: "8";
+    font-size: 8em;
+    color: white;
+    font-family: 'VT323', monospace;
+}
+.placeholder.c9::after {
+	content: "9";
+    font-size: 8em;
+    color: white;
+    font-family: 'VT323', monospace;
+}
+
+
+
+
