@@ -70,7 +70,7 @@ class TestApp:
         )
 
     def quit(self):
-        self.tabletService.showWebview()
+        return self.tabletService.hideWebview()
 
 
 
@@ -552,8 +552,8 @@ def reset():
 @app.route('/quit', methods=['GET'])
 @cross_origin(origin=CURRENT_IP, headers=['Content- Type', 'Authorization'])
 def quit():
-    run_app.quit()
-    return str(behaviour)
+    
+    return str(run_app.quit())
 
 
 
